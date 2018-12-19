@@ -1,0 +1,22 @@
+global class AccountController
+{
+     @AuraEnabled
+    public static Account getAccountData(String AccountId,String idString)
+    {
+       
+        Account acc= [select Id,Name,TickerSymbol from Account where Id=:AccountId];
+      
+        return acc;
+    }
+    @AuraEnabled
+    public static Account updateSite(Account acc)
+    {
+        if(acc.TickerSymbol!='Approved'){
+       
+        acc.TickerSymbol='Approved';    
+        }
+        update acc;
+        return acc;
+    } 
+   
+}
