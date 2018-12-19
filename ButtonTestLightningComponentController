@@ -1,0 +1,59 @@
+({
+   doInit : function(component, event, helper)
+       {
+           //calling controller method
+        var action = component.get("c.getAccountData");
+ 
+        action.setParams
+        ({
+        AccountId : component.get("v.recordId"),
+            idString    :component.get("v.recordId")
+        });
+          
+        action.setCallback(this, function(response)
+			   {
+            //Getting the state
+ 	  			var state = response.getState();
+            	if(state === "SUCCESS")
+   				{
+			   	component.set("v.account", response.getReturnValue());
+            }else
+            {
+                alert('inside Error block');
+                console.log('Error');
+            }
+        });
+  //Executing the server side logic
+        $A.enqueueAction(action);
+    },
+    
+    updateStatus:function(component,event,helper)
+    {
+        //Displaying an alert message
+        alert('method is called');
+  //calling the apex controller method
+        var action=component.get('c.updateSite');
+        action.setParams
+        ({
+           acc:component.get("v.account")
+           
+        });
+        action.setCallback(this,function(res){
+            component.set("v.account",res.getReturnValue());
+        })
+        
+  //Executing the server side logic
+         $A.enqueueAction(action);
+     
+    },
+    
+    doRefresh:function(component,event,helper)
+    {
+        var myEvent = $A.get("e.force:refreshView");
+        alert('myEvent :: ' + myEvent );
+  //Refreshing the page
+        
+         myEvent.fire();
+    }
+
+})
