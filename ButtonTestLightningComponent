@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"
+                            controller="AccountController" >
+          <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+       <aura:registerEvent name="refreshView" type="force:refreshView" />
+          <aura:attribute name="account" type="Account" default="{'sobjectType':'Account'}"/>
+    	  <aura:attribute name="contact" type="Contact" default="{'sobjectType':'Contact'}"/>
+          <ui:button   label="Approve"   press="{!c.updateStatus}"/>
+          <ui:button   label="refresh"   press="{!c.doRefresh}" />
+    
+       </aura:component>
